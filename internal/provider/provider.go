@@ -795,7 +795,8 @@ func New(ctx context.Context) (*schema.Provider, error) {
 			"aws_networkmanager_site":                         networkmanager.DataSourceSite(),
 			"aws_networkmanager_sites":                        networkmanager.DataSourceSites(),
 
-			"aws_opensearch_domain": opensearch.DataSourceDomain(),
+			"aws_opensearch_domain":         opensearch.DataSourceDomain(),
+			"aws_opensearch_engine_version": opensearch.DataSourceEngineVersion(),
 
 			"aws_organizations_delegated_administrators":                organizations.DataSourceDelegatedAdministrators(),
 			"aws_organizations_delegated_services":                      organizations.DataSourceDelegatedServices(),

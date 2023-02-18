@@ -1,9 +1,9 @@
-package elasticsearch
+package opensearch
 
 import (
 	"context"
 
-	"github.com/aws/aws-sdk-go/service/elasticsearchservice"
+	"github.com/aws/aws-sdk-go/service/opensearchservice"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-provider-aws/internal/conns"
@@ -32,13 +32,13 @@ func DataSourceEngineVersion() *schema.Resource {
 
 func dataSourceEngineListVersions(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	var diags diag.Diagnostics
-	conn := meta.(*conns.AWSClient).ElasticsearchConn()
+	conn := meta.(*conns.AWSClient).OpenSearchConn()
 
-	input := &elasticsearchservice.ListElasticsearchVersionsInput{}
+	input := &opensearchservice.ListVersionsInput{}
 
 	var obtainedVersions []string
-	err := conn.ListElasticsearchVersionsPagesWithContext(ctx, input, func(lvo *elasticsearchservice.ListElasticsearchVersionsOutput, lastPage bool) bool {
-		for _, version := range lvo.ElasticsearchVersions {
+	err := conn.ListVersionsPagesWithContext(ctx, input, func(lvo *opensearchservice.ListVersionsOutput, lastPage bool) bool {
+		for _, version := range lvo.Versions {
 			if version == nil {
 				continue
 			}
