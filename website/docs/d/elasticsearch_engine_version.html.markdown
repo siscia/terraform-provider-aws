@@ -6,15 +6,15 @@ description: |-
   Get information on an Elasticsearch engine version.
 ---
 
-# Data Source: aws_elasticsearch_domain
+# Data Source: aws_elasticsearch_engine_version
 
-Use this data source to get information about Elasticsearch version
+Use this data source to get information about Elasticsearch engine version
 
 ## Example Usage
 
 ```terraform
-data "aws_elasticsearch_engine_version" "my_domain" {
-  version = "OpenSearch_2.3"
+data "aws_elasticsearch_engine_version" "engine_version" {
+  version = "1.5"
 }
 ```
 
@@ -22,7 +22,7 @@ data "aws_elasticsearch_engine_version" "my_domain" {
 
 The following arguments are supported:
 
-* `version` – (Optional) Version of the Elasticsearch/Opensearch engine. Conflict with `preffered_versions`.
+* `version` – (Optional) Version of the Elasticsearch engine. Conflict with `preferred_versions`.
 * `preferred_versions` - (Optional) Ordered list of preffered version. The first match in this list will be returned.
  Conflict with `version`
 
@@ -30,4 +30,4 @@ The following arguments are supported:
 
 The following attributes are exported:
 
-* `version` – Elasticsearch/Opensearch engine version.
+* `version` – Elasticsearch engine version.
