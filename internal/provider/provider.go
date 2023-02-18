@@ -643,7 +643,8 @@ func New(ctx context.Context) (*schema.Provider, error) {
 			"aws_elastic_beanstalk_hosted_zone":    elasticbeanstalk.DataSourceHostedZone(),
 			"aws_elastic_beanstalk_solution_stack": elasticbeanstalk.DataSourceSolutionStack(),
 
-			"aws_elasticsearch_domain": elasticsearch.DataSourceDomain(),
+			"aws_elasticsearch_domain":         elasticsearch.DataSourceDomain(),
+			"aws_elesticsearch_engine_version": elasticsearch.DataSourceEngineVersion(),
 
 			"aws_elb":                 elb.DataSourceLoadBalancer(),
 			"aws_elb_hosted_zone_id":  elb.DataSourceHostedZoneID(),
