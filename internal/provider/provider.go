@@ -644,7 +644,7 @@ func New(ctx context.Context) (*schema.Provider, error) {
 			"aws_elastic_beanstalk_solution_stack": elasticbeanstalk.DataSourceSolutionStack(),
 
 			"aws_elasticsearch_domain":         elasticsearch.DataSourceDomain(),
-			"aws_elesticsearch_engine_version": elasticsearch.DataSourceEngineVersion(),
+			"aws_elasticsearch_engine_version": elasticsearch.DataSourceEngineVersion(),
 
 			"aws_elb":                 elb.DataSourceLoadBalancer(),
 			"aws_elb_hosted_zone_id":  elb.DataSourceHostedZoneID(),

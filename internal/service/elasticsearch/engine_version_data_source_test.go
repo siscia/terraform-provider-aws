@@ -14,7 +14,7 @@ import (
 func TestAccElasticSearchEngineVersionDataSource_basic(t *testing.T) {
 	ctx := acctest.Context(t)
 	dataSourceName := "data.aws_elasticsearch_engine_version.test"
-	version := "1"
+	version := "OpenSearch_2.3"
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t); testAccEngineVersionPreCheck(ctx, t) },
