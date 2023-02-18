@@ -30,7 +30,26 @@ func TestAccElasticSearchEngineVersionDataSource_basic(t *testing.T) {
 			},
 		},
 	})
+}
 
+func TestAccEleasticSearchEngineVersionDataSource_preferred_version(t *testing.T) {
+	ctx := acctest.Context(t)
+	dataSourceName := "data.aws_elasticsearch_engine_version.test"
+
+	resource.ParallelTest(t, resource.TestCase{
+		PreCheck:                 func() { acctest.PreCheck(t); testAccEngineVersionPreCheck(ctx, t) },
+		ErrorCheck:               acctest.ErrorCheck(t, opensearchservice.EndpointsID),
+		ProtoV5ProviderFactories: acctest.ProtoV5ProviderFactories,
+		CheckDestroy:             nil,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccEngineVersionDataSourceConfig_preferred(),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr(dataSourceName, "version", "OpenSearch_1.0"),
+				),
+			},
+		},
+	})
 }
 
 func testAccEngineVersionDataSourceConfig_basic(version string) string {
@@ -39,6 +58,13 @@ data "aws_elasticsearch_engine_version" "test" {
   version                = %[1]q
 }
 `, version)
+}
+
+func testAccEngineVersionDataSourceConfig_preferred() string {
+	return fmt.Sprintf(`
+data "aws_elasticsearch_engine_version" "test" {
+  preferred_version = ["OpenSearch_1.0", "ElasticSearch_7.10"]
+}`)
 }
 
 func testAccEngineVersionPreCheck(ctx context.Context, t *testing.T) {
