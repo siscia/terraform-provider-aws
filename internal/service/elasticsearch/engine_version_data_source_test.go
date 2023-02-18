@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/aws/aws-sdk-go/service/opensearchservice"
+	"github.com/aws/aws-sdk-go/service/elasticsearchservice"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-provider-aws/internal/acctest"
 	"github.com/hashicorp/terraform-provider-aws/internal/conns"
@@ -18,7 +18,7 @@ func TestAccElasticSearchEngineVersionDataSource_basic(t *testing.T) {
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t); testAccEngineVersionPreCheck(ctx, t) },
-		ErrorCheck:               acctest.ErrorCheck(t, opensearchservice.EndpointsID),
+		ErrorCheck:               acctest.ErrorCheck(t, elasticsearchservice.EndpointsID),
 		ProtoV5ProviderFactories: acctest.ProtoV5ProviderFactories,
 		CheckDestroy:             nil,
 		Steps: []resource.TestStep{
@@ -38,14 +38,14 @@ func TestAccElasticSearchEngineVersionDataSource_preferred_version(t *testing.T)
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t); testAccEngineVersionPreCheck(ctx, t) },
-		ErrorCheck:               acctest.ErrorCheck(t, opensearchservice.EndpointsID),
+		ErrorCheck:               acctest.ErrorCheck(t, elasticsearchservice.EndpointsID),
 		ProtoV5ProviderFactories: acctest.ProtoV5ProviderFactories,
 		CheckDestroy:             nil,
 		Steps: []resource.TestStep{
 			{
 				Config: testAccEngineVersionDataSourceConfig_preferred(),
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttr(dataSourceName, "version", "1.0"),
+					resource.TestCheckResourceAttr(dataSourceName, "version", "1.5"),
 				),
 			},
 		},
@@ -63,16 +63,16 @@ data "aws_elasticsearch_engine_version" "test" {
 func testAccEngineVersionDataSourceConfig_preferred() string {
 	return fmt.Sprintf(`
 data "aws_elasticsearch_engine_version" "test" {
-  preferred_versions = ["1.0", "7.10"]
+  preferred_versions = ["1.5", "7.10"]
 }`)
 }
 
 func testAccEngineVersionPreCheck(ctx context.Context, t *testing.T) {
-	conn := acctest.Provider.Meta().(*conns.AWSClient).OpenSearchConn()
+	conn := acctest.Provider.Meta().(*conns.AWSClient).ElasticsearchConn()
 
-	input := &opensearchservice.ListVersionsInput{}
+	input := &elasticsearchservice.ListElasticsearchVersionsInput{}
 
-	_, err := conn.ListVersionsWithContext(ctx, input)
+	_, err := conn.ListElasticsearchVersionsWithContext(ctx, input)
 
 	if acctest.PreCheckSkipError(err) {
 		t.Skipf("skipping acceptance testing: %s", err)

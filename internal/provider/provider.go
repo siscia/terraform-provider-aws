@@ -1495,10 +1495,6 @@ func New(ctx context.Context) (*schema.Provider, error) {
 			"aws_elastic_beanstalk_configuration_template": elasticbeanstalk.ResourceConfigurationTemplate(),
 			"aws_elastic_beanstalk_environment":            elasticbeanstalk.ResourceEnvironment(),
 
-			"aws_elasticsearch_domain":              elasticsearch.ResourceDomain(),
-			"aws_elasticsearch_domain_policy":       elasticsearch.ResourceDomainPolicy(),
-			"aws_elasticsearch_domain_saml_options": elasticsearch.ResourceDomainSAMLOptions(),
-
 			"aws_elastictranscoder_pipeline": elastictranscoder.ResourcePipeline(),
 			"aws_elastictranscoder_preset":   elastictranscoder.ResourcePreset(),
 
