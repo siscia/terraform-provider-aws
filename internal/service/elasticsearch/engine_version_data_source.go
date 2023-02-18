@@ -57,6 +57,7 @@ func dataSourceEngineListVersions(ctx context.Context, d *schema.ResourceData, m
 		for _, version := range obtainedVersions {
 			if requestVersion.(string) == version {
 				d.Set("version", version)
+				d.SetId(version)
 				return diags
 			}
 		}
@@ -69,6 +70,7 @@ func dataSourceEngineListVersions(ctx context.Context, d *schema.ResourceData, m
 		for _, okVersion := range requestVersions.([]string) {
 			if _, ok := availableVersions[okVersion]; ok {
 				d.Set("version", okVersion)
+				d.SetId(okVersion)
 				return diags
 			}
 		}
