@@ -62,15 +62,16 @@ func dataSourceEngineListVersions(ctx context.Context, d *schema.ResourceData, m
 			}
 		}
 	}
-	if requestVersions, ok := d.GetOk("preferred_versions"); ok {
+	if preferredVersions, ok := d.GetOk("preferred_versions"); ok {
 		availableVersions := make(map[string]interface{})
 		for _, version := range obtainedVersions {
 			availableVersions[version] = nil
 		}
-		for _, okVersion := range requestVersions.([]string) {
-			if _, ok := availableVersions[okVersion]; ok {
-				d.Set("version", okVersion)
-				d.SetId(okVersion)
+		for _, preferredVersion := range preferredVersions.([]interface{}) {
+			version := preferredVersion.(string)
+			if _, ok := availableVersions[version]; ok {
+				d.Set("version", version)
+				d.SetId(version)
 				return diags
 			}
 		}
