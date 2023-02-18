@@ -32,7 +32,7 @@ func TestAccElasticSearchEngineVersionDataSource_basic(t *testing.T) {
 	})
 }
 
-func TestAccEleasticSearchEngineVersionDataSource_preferred_version(t *testing.T) {
+func TestAccElasticSearchEngineVersionDataSource_preferred_version(t *testing.T) {
 	ctx := acctest.Context(t)
 	dataSourceName := "data.aws_elasticsearch_engine_version.test"
 
