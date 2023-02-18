@@ -63,7 +63,7 @@ data "aws_elasticsearch_engine_version" "test" {
 func testAccEngineVersionDataSourceConfig_preferred() string {
 	return fmt.Sprintf(`
 data "aws_elasticsearch_engine_version" "test" {
-  preferred_version = ["OpenSearch_1.0", "ElasticSearch_7.10"]
+  preferred_versions = ["OpenSearch_1.0", "ElasticSearch_7.10"]
 }`)
 }
 
